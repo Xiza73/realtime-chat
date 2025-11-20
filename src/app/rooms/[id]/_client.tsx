@@ -13,6 +13,7 @@ interface RoomClientProps {
   room: {
     id: string;
     name: string | null;
+    is_pvp: boolean | null;
   };
   user: {
     id: string;
@@ -48,14 +49,23 @@ export function RoomClient({ room, user, messages }: RoomClientProps) {
   return (
     <div className="container mx-auto h-screen-with-header border border-y-0 flex flex-col">
       <div className="flex items-center justify-between gap-2 p-4">
-        <div className="border-b">
-          <h1 className="text-2xl font-bold">{room.name}</h1>
-          <p className="text-muted-foreground text-sm">
-            {connectedUsers} {connectedUsers === 1 ? "usuario" : "usuarios"} en
-            línea
-          </p>
-        </div>
-        <InviteUserModal roomId={room.id} />
+        {room.is_pvp && (
+          <div className="border-b">
+            <h1 className="text-2xl font-bold">Chat</h1>
+          </div>
+        )}
+        {!room.is_pvp && (
+          <>
+            <div className="border-b">
+              <h1 className="text-2xl font-bold">{room.name}</h1>
+              <p className="text-muted-foreground text-sm">
+                {connectedUsers} {connectedUsers === 1 ? "usuario" : "usuarios"}{" "}
+                en línea
+              </p>
+            </div>
+            <InviteUserModal roomId={room.id} />
+          </>
+        )}
       </div>
       <div
         className="grow overflow-y-auto flex flex-col-reverse"
