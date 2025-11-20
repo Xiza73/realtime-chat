@@ -1,4 +1,4 @@
-import { createAdminClient } from "@/services/supabase/server";
+import { createAdminClient } from "@/services/supabase/server/create-admin-client";
 
 export default async function getPublicRooms() {
   const supabase = createAdminClient();

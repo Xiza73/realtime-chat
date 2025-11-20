@@ -1,8 +1,7 @@
 import { cn } from "@/lib/utils";
 import { Message } from "@/services/supabase/actions/messages";
-import { User2Icon } from "lucide-react";
-import Image from "next/image";
 import { Ref } from "react";
+import UserAvatar from "./user-avatar";
 
 const DATE_FORMATTER = new Intl.DateTimeFormat("es-PE", {
   dateStyle: "short",
@@ -29,19 +28,7 @@ export function ChatMessage({
       )}
     >
       <div className="shrink-0">
-        {author.image_url != null ? (
-          <Image
-            src={author.image_url}
-            alt={author.name}
-            width={40}
-            height={40}
-            className="rounded-full"
-          />
-        ) : (
-          <div className="size-10 rounded-full flex items-center justify-center border bg-muted text-muted-foreground overflow-hidden">
-            <User2Icon className="size-[30px] mt-2.5" />
-          </div>
-        )}
+        <UserAvatar imageUrl={author.image_url} name={author.name} />
       </div>
       <div className="grow space-y-0.5">
         <div className="flex items-baseline gap-2">

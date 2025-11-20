@@ -1,7 +1,7 @@
 "use server";
 
 import { getCurrentUser } from "../lib/getCurrentUser";
-import { createAdminClient } from "../server";
+import { createAdminClient } from "../server/create-admin-client";
 
 export type Message = {
   id: string;

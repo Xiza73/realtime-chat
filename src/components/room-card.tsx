@@ -10,21 +10,23 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 
+interface RoomCardProps {
+  id: string;
+  name: string | null;
+  memberCount: number;
+  isJoined: boolean;
+}
+
 export default function RoomCard({
   id,
   name,
   memberCount,
   isJoined,
-}: {
-  id: string;
-  name: string;
-  memberCount: number;
-  isJoined: boolean;
-}) {
+}: RoomCardProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{name}</CardTitle>
+        <CardTitle>{name ?? "Nombre no definido"}</CardTitle>
         <CardDescription>
           {memberCount} {memberCount === 1 ? "miembro" : "miembros"}
         </CardDescription>

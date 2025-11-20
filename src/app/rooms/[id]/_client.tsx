@@ -12,7 +12,7 @@ import { useState } from "react";
 interface RoomClientProps {
   room: {
     id: string;
-    name: string;
+    name: string | null;
   };
   user: {
     id: string;

@@ -1,9 +1,9 @@
 import { getCurrentUser } from "@/services/supabase/lib/getCurrentUser";
-import { createAdminClient } from "@/services/supabase/server";
 import { notFound } from "next/navigation";
 import { RoomClient } from "./_client";
 import getUser from "@/services/rooms/proxy/get-user";
 import getMessages from "@/services/rooms/proxy/get-messages";
+import { createAdminClient } from "@/services/supabase/server/create-admin-client";
 
 interface RoomPageProps {
   params: Promise<{ id: string }>;
@@ -11,6 +11,7 @@ interface RoomPageProps {
 
 export default async function RoomPage({ params }: RoomPageProps) {
   const { id } = await params;
+  console.log({ id });
   const [room, user, messages] = await Promise.all([
     getRoom(id),
     getUser(),

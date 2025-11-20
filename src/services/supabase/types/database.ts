@@ -19,18 +19,21 @@ export type Database = {
           created_at: string
           id: string
           is_public: boolean | null
+          is_pvp: boolean | null
           name: string | null
         }
         Insert: {
           created_at?: string
           id?: string
           is_public?: boolean | null
+          is_pvp?: boolean | null
           name?: string | null
         }
         Update: {
           created_at?: string
           id?: string
           is_public?: boolean | null
+          is_pvp?: boolean | null
           name?: string | null
         }
         Relationships: []
@@ -112,19 +115,19 @@ export type Database = {
           created_at: string
           id: string
           image_url: string | null
-          name: string | null
+          name: string
         }
         Insert: {
           created_at?: string
           id?: string
           image_url?: string | null
-          name?: string | null
+          name: string
         }
         Update: {
           created_at?: string
           id?: string
           image_url?: string | null
-          name?: string | null
+          name?: string
         }
         Relationships: []
       }

@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { createClient } from "../server";
+import { createClient } from "../server/create-client";
 
 export const getCurrentUser = cache(async () => {
   const supabase = await createClient();

@@ -2,15 +2,17 @@ import RoomCard from "./room-card";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
+interface RoomListProps {
+  title: string;
+  rooms: { id: string; name: string | null; memberCount: number }[];
+  isJoined?: boolean;
+}
+
 export default function RoomList({
   title,
   rooms,
   isJoined = false,
-}: {
-  title: string;
-  rooms: { id: string; name: string; memberCount: number }[];
-  isJoined?: boolean;
-}) {
+}: RoomListProps) {
   if (rooms.length === 0) return null;
 
   return (

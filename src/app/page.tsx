@@ -1,3 +1,4 @@
+import ContactList from "@/components/contact-list";
 import RoomList from "@/components/room-list";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,6 +9,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
+import getContacts from "@/services/contacts/proxy/get-contacts";
 import getJoinedRooms from "@/services/rooms/proxy/get-joined-rooms";
 import getPublicRooms from "@/services/rooms/proxy/get-public-rooms";
 import { getCurrentUser } from "@/services/supabase/lib/getCurrentUser";
@@ -21,15 +23,18 @@ export default async function Home() {
     redirect("/auth/login");
   }
 
-  const [publicRooms, joinedRooms] = await Promise.all([
+  const [publicRooms, joinedRooms, contacts] = await Promise.all([
     getPublicRooms(),
     getJoinedRooms(user.id),
+    getContacts(),
   ]);
 
-  if (publicRooms.length === 0 && joinedRooms.length === 0) {
-    return (
-      <div className="container mx-auto max-w-3xl px-4 py-8 space-y-8">
-        <Empty className="border border-dashed">
+  const hasRooms = publicRooms.length > 0 || joinedRooms.length > 0;
+
+  return (
+    <div className="container mx-auto px-4 py-8 space-y-8">
+      {!hasRooms && (
+        <Empty className="border border-dashed max-w-3xl mx-auto">
           <EmptyHeader>
             <EmptyMedia variant="icon">
               <MessagesSquareIcon />
@@ -45,19 +50,20 @@ export default async function Home() {
             </Button>
           </EmptyContent>
         </Empty>
-      </div>
-    );
-  }
+      )}
 
-  return (
-    <div className="container mx-auto px-4 py-8 space-y-8">
-      <RoomList title="Tus salas" rooms={joinedRooms} isJoined />
-      <RoomList
-        title="Salas públicas"
-        rooms={publicRooms.filter(
-          (room) => !joinedRooms.some((r) => r.id === room.id)
-        )}
-      />
+      {hasRooms && <RoomList title="Tus salas" rooms={joinedRooms} isJoined />}
+
+      <ContactList title="Contactos" contacts={contacts} />
+
+      {hasRooms && (
+        <RoomList
+          title="Salas públicas"
+          rooms={publicRooms.filter(
+            (room) => !joinedRooms.some((r) => r.id === room.id)
+          )}
+        />
+      )}
     </div>
   );
 }

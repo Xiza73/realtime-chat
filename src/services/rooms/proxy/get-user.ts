@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/services/supabase/lib/getCurrentUser";
-import { createAdminClient } from "@/services/supabase/server";
+import { createAdminClient } from "@/services/supabase/server/create-admin-client";
 
 export default async function getUser() {
   const user = await getCurrentUser();
