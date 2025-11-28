@@ -2,6 +2,12 @@
 
 Realtime Chat es un chat en tiempo real que permite a los usuarios interactuar en tiempo real con otros usuarios en línea. El chat se basa en la tecnología de Supabase configurada con Realtime y Next.js.
 
+## Funcionalidad Extra
+
+- Ahora puedes resumir una porción de la conversación de un chat, para ello debes seleccionar el inicio y el final de la conversación que quieres resumir.
+
+![alt text](image.png)
+
 ## Instalación y configuración
 
 Para instalar Realtime Chat, sigue los siguientes pasos:
